@@ -1,0 +1,42 @@
+Categories:
+  - Connectivity
+  - System
+License: AGPLv3
+AuthorName: PMK
+SourceCode: https://github.com/pmk/week_calendar
+IssueTracker: https://github.com/pmk/week_calendar/issues
+Changelog: https://github.com/pmk/week_calendar/releases
+
+AutoName: Week Calendar
+
+RepoType: git
+Repo: https://github.com/pmk/week_calendar.git
+Binaries: https://github.com/pmk/week_calendar/releases/download/v%v/WeekCalendar-%v.apk
+
+Builds:
+  - versionName: 1.0.0
+    versionCode: 1
+    commit: v1.0.0
+    gradle:
+      - yes
+    output: build/app/outputs/flutter-apk/app-release.apk
+    prebuild:
+      - export PUB_CACHE=$(pwd)/.pub-cache
+      - submodules/flutter/bin/flutter config --no-analytics
+      - submodules/flutter/bin/flutter pub get
+    scanignore:
+      - submodules/flutter/bin/cache
+      - submodules/flutter/packages/flutter_tools/gradle/flutter.gradle
+    scandelete:
+      - submodules/flutter
+      - .pub-cache
+    build:
+      - export PUB_CACHE=$(pwd)/.pub-cache
+      - submodules/flutter/bin/flutter build apk --release --split-per-abi
+
+AllowedAPKSigningKeys: 8b9a1e00beaaf08d89cf7efc5a54cc76efd91a712552e664c171bd1f56a237a1
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 1.0.0
+CurrentVersionCode: 1

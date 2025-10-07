@@ -1,6 +1,6 @@
 # Week Calendar
 
-A calendar Android app showing the week view. It uses CalDAV via DAVx⁵.
+A calendar Android app showing the week view. It uses CalDAV via [DAVx⁵](https://github.com/bitfireAT/davx5-ose).
 
 <img src="https://raw.githubusercontent.com/PMK/week_calendar/refs/heads/master/lib/assets/screenshot/01.png" style="width: 230px;" alt="week calendar"/> <img src="https://raw.githubusercontent.com/PMK/week_calendar/refs/heads/master/lib/assets/screenshot/02.png" style="width: 230px;" alt="new event"/> <img src="https://raw.githubusercontent.com/PMK/week_calendar/refs/heads/master/lib/assets/screenshot/03.png" style="width: 230px;" alt="list events per day"/> <img src="https://raw.githubusercontent.com/PMK/week_calendar/refs/heads/master/lib/assets/screenshot/04.png" style="width: 230px;" alt="search"/>
 <img src="https://raw.githubusercontent.com/PMK/week_calendar/refs/heads/master/lib/assets/screenshot/05.png" style="width: 230px;" alt="settings"/> <img src="https://raw.githubusercontent.com/PMK/week_calendar/refs/heads/master/lib/assets/screenshot/06.png" style="width: 230px;" alt="dark mode"/> <img src="https://raw.githubusercontent.com/PMK/week_calendar/refs/heads/master/lib/assets/screenshot/07.png" style="width: 230px;" alt="jump to week"/>

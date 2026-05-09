@@ -52,7 +52,7 @@ jobs:
             echo "keyPassword=${{ secrets.KEY_PASSWORD }}"
             echo "keyAlias=${{ secrets.KEY_ALIAS }}"
             echo "storeFile=keystore.jks"
-          } > android/key.properties
+          } > android/keystore.properties
 
       - name: Build release APKs
         run: flutter build apk --release --split-per-abi

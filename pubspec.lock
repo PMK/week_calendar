@@ -62,6 +62,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dynamic_icon_plus:
+    dependency: "direct main"
+    description:
+      name: flutter_dynamic_icon_plus
+      sha256: "7721ef2666691064dece879d968fa7e1c4d64aa743ea998e6b1e65a1b482f212"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -139,6 +147,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.8"
   sky_engine:
     dependency: transitive
     description: flutter

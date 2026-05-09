@@ -1,17 +1,31 @@
-# week_calendar
+# Week Calendar
 
-A new Flutter project.
+A calendar app showing the week view with CalDAV, Google Calendar, Samsung Calendar, Outlook/Exchange and DAVx⁵ support and displays the current week number in the icon.
 
-## Getting Started
+### Install dependencies
 
-This project is a starting point for a Flutter application.
+```
+flutter pub run
+```
 
-A few resources to get you started if this is your first Flutter project:
+### Analyze and test
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```
+flutter analyze
+flutter test --coverage
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Build APK
+
+```
+flutter clean
+flutter build apk
+```
+
+### Sign and verify
+
+See https://randombits.dev/articles/android/signing-with-cmd
+
+## License
+
+GNU AGPL v3

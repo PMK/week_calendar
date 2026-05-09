@@ -1,14 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
     <application
-        android:label="week_calendar"
+        android:label="Week Calendar"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher_adaptive">
+        <service
+            android:name="com.solusibejo.flutter_dynamic_icon_plus.FlutterDynamicIconPlusService"
+            android:stopWithTask="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:taskAffinity=""
             android:theme="@style/LaunchTheme"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
@@ -20,11 +27,980 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+        </activity>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_adaptive"
+            android:name=".DEFAULT"
+            android:exported="true"
+            android:enabled="true"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_1_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_1_adaptive"
+            android:name=".icon_1"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_2_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_2_adaptive"
+            android:name=".icon_2"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_3_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_3_adaptive"
+            android:name=".icon_3"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_4_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_4_adaptive"
+            android:name=".icon_4"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_5_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_5_adaptive"
+            android:name=".icon_5"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_6_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_6_adaptive"
+            android:name=".icon_6"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_7_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_7_adaptive"
+            android:name=".icon_7"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_8_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_8_adaptive"
+            android:name=".icon_8"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_9_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_9_adaptive"
+            android:name=".icon_9"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_10_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_10_adaptive"
+            android:name=".icon_10"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_11_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_11_adaptive"
+            android:name=".icon_11"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_12_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_12_adaptive"
+            android:name=".icon_12"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_13_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_13_adaptive"
+            android:name=".icon_13"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_14_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_14_adaptive"
+            android:name=".icon_14"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_15_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_15_adaptive"
+            android:name=".icon_15"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_16_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_16_adaptive"
+            android:name=".icon_16"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_17_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_17_adaptive"
+            android:name=".icon_17"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_18_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_18_adaptive"
+            android:name=".icon_18"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_19_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_19_adaptive"
+            android:name=".icon_19"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_20_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_20_adaptive"
+            android:name=".icon_20"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_21_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_21_adaptive"
+            android:name=".icon_21"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_22_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_22_adaptive"
+            android:name=".icon_22"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_23_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_23_adaptive"
+            android:name=".icon_23"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_24_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_24_adaptive"
+            android:name=".icon_24"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_25_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_25_adaptive"
+            android:name=".icon_25"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_26_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_26_adaptive"
+            android:name=".icon_26"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_27_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_27_adaptive"
+            android:name=".icon_27"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_28_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_28_adaptive"
+            android:name=".icon_28"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_29_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_29_adaptive"
+            android:name=".icon_29"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_30_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_30_adaptive"
+            android:name=".icon_30"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_31_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_31_adaptive"
+            android:name=".icon_31"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_32_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_32_adaptive"
+            android:name=".icon_32"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_33_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_33_adaptive"
+            android:name=".icon_33"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_34_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_34_adaptive"
+            android:name=".icon_34"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_35_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_35_adaptive"
+            android:name=".icon_35"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_36_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_36_adaptive"
+            android:name=".icon_36"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_37_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_37_adaptive"
+            android:name=".icon_37"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_38_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_38_adaptive"
+            android:name=".icon_38"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_39_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_39_adaptive"
+            android:name=".icon_39"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_40_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_40_adaptive"
+            android:name=".icon_40"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_41_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_41_adaptive"
+            android:name=".icon_41"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_42_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_42_adaptive"
+            android:name=".icon_42"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_43_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_43_adaptive"
+            android:name=".icon_43"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_44_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_44_adaptive"
+            android:name=".icon_44"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_45_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_45_adaptive"
+            android:name=".icon_45"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_46_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_46_adaptive"
+            android:name=".icon_46"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_47_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_47_adaptive"
+            android:name=".icon_47"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_48_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_48_adaptive"
+            android:name=".icon_48"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_49_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_49_adaptive"
+            android:name=".icon_49"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_50_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_50_adaptive"
+            android:name=".icon_50"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_51_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_51_adaptive"
+            android:name=".icon_51"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_52_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_52_adaptive"
+            android:name=".icon_52"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:label="Week Calendar"
+            android:icon="@mipmap/ic_launcher_53_adaptive"
+            android:roundIcon="@mipmap/ic_launcher_53_adaptive"
+            android:name=".icon_53"
+            android:exported="true"
+            android:enabled="false"
+            android:targetActivity=".MainActivity">
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
@@ -37,6 +1013,7 @@
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
     <queries>
+        <package android:name="at.bitfire.davdroid" />
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>

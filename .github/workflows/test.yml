@@ -1,0 +1,43 @@
+name: Test
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    name: Prepare
+    uses: ./.github/workflows/prepare.yml
+
+  test:
+    name: Analyze And Test
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.9'
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test

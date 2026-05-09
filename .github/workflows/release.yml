@@ -1,0 +1,91 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Test and release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.9'
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test
+
+      - name: Decode keystore
+        run: |
+          set -euo pipefail
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore.jks
+
+      - name: Write signing properties
+        run: |
+          set -euo pipefail
+          {
+            echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}"
+            echo "keyPassword=${{ secrets.KEY_PASSWORD }}"
+            echo "keyAlias=${{ secrets.KEY_ALIAS }}"
+            echo "storeFile=keystore.jks"
+          } > android/key.properties
+
+      - name: Build release APKs
+        run: flutter build apk --release --split-per-abi
+
+      - name: Build release app bundle
+        run: flutter build appbundle --release
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts
+          path: |
+            build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+            build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+            build/app/outputs/flutter-apk/app-x86_64-release.apk
+            build/app/outputs/bundle/release/app-release.aab
+
+      - name: Extract version
+        run: |
+          set -euo pipefail
+          version="$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')"
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Check release tag
+        run: |
+          set -euo pipefail
+          if git rev-parse -q --verify "refs/tags/v${VERSION}" >/dev/null; then
+            echo "VERSION=${VERSION}-build-${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Create GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk,build/app/outputs/flutter-apk/app-arm64-v8a-release.apk,build/app/outputs/flutter-apk/app-x86_64-release.apk,build/app/outputs/bundle/release/app-release.aab
+          tag: v${{ env.VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}

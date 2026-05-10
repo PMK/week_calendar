@@ -1053,7 +1053,9 @@ void main() {
                 'enabled': true,
               },
             ],
-            'getCalendarEvents' => _mockCalendarEventsForCurrentWeek(),
+            'getCalendarEvents' => _mockCalendarEventsForRequestedWeek(
+              call.arguments,
+            ),
             _ => null,
           };
         });
@@ -1813,7 +1815,21 @@ bool _isSameDay(DateTime first, DateTime second) {
 
 List<Map<String, Object?>> _mockCalendarEventsForCurrentWeek() {
   final weekStart = _startOfWeek(DateTime.now());
+  return _mockCalendarEventsForWeekStart(weekStart);
+}
 
+List<Map<String, Object?>> _mockCalendarEventsForRequestedWeek(
+  Object? arguments,
+) {
+  final argumentMap = arguments as Map<dynamic, dynamic>;
+  final weekStart = DateTime.fromMillisecondsSinceEpoch(
+    argumentMap['startMillis'] as int,
+  );
+
+  return _mockCalendarEventsForWeekStart(weekStart);
+}
+
+List<Map<String, Object?>> _mockCalendarEventsForWeekStart(DateTime weekStart) {
   Map<String, Object?> eventRow({
     required String id,
     required int dayOffset,

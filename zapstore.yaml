@@ -1,0 +1,32 @@
+name: Week Calendar
+repository: https://github.com/pmk/week_calendar
+description: A calendar app showing the week view with CalDAV, Google Calendar, Samsung Calendar, Outlook/Exchange and DAVx⁵ support and displays the current week number in the icon.
+summary: A calendar app showing the week view
+tags:
+  - calendar
+  - week
+  - weeknumber
+  - agenda
+  - caldav
+  - google
+  - samsung
+  - outlook
+  - exchange
+  - office365
+  - davx5
+  - todo
+  - tasks
+  - android
+  - grapheneos
+license: AGPL-3.0
+website: https://github.com/pmk/week_calendar
+icon: fastlane/metadata/android/en-US/images/icon.png
+images:
+  - fastlane/metadata/android/en-US/images/phoneScreenshots/1.png
+  - fastlane/metadata/android/en-US/images/phoneScreenshots/2.png
+  - fastlane/metadata/android/en-US/images/phoneScreenshots/3.png
+  - fastlane/metadata/android/en-US/images/phoneScreenshots/4.png
+  - fastlane/metadata/android/en-US/images/phoneScreenshots/5.png
+metadata_sources:
+  - github
+pubkey: npub1empfs88d5tkzefvmg9mcs96kyn2xssnleg9h2nysy6wmpq2dfunq884nj0

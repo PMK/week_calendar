@@ -1,0 +1,12 @@
+Week Calendar is a week-focused Android calendar app that shows a clean, scrollable week view.
+
+There is support for the following sync apps or solutions*:
+- CalDAV
+- Google Calendar
+- Samsung Calendar
+- Outlook / Exchange / Office365
+- DAVx⁵
+
+* The app will detect if there is a provider of calendar data if the **calendar permission** is granted.
+
+Optionally you can turn on the setting to show the current ISO week number in the app's icon.

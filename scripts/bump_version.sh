@@ -105,7 +105,12 @@ changelog_file="$changelog_directory/$next_changelog_number.txt"
 
 release_boundary="$(
   git log --format='%H%x09%s' |
-    awk -F '\t' '$2 ~ /^chore\(release\): bump version to / { print $1; exit }'
+    awk -F '\t' '
+      !found && $2 ~ /^chore\(release\): bump version to / {
+        print $1
+        found = 1
+      }
+    '
 )"
 if [[ -z "$release_boundary" ]]; then
   release_boundary="$(

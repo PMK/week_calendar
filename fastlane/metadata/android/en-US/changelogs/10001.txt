@@ -1,0 +1,1 @@
+- feat(bump_version.sh): add bump script for release new version

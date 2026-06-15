@@ -1,20 +1,86 @@
 name: Release
 
+run-name: Release tested commit ${{ inputs.target_sha }}
+
 on:
   workflow_dispatch:
+    inputs:
+      target_sha:
+        description: 'Tested release commit SHA'
+        required: true
+        type: string
 
 permissions:
   contents: write
 
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
 jobs:
   release:
-    name: Test and release
+    name: Build signed artifacts and release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout tested commit
         uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.target_sha }}
           fetch-depth: 0
+
+      - name: Read and validate release version
+        id: version
+        shell: bash
+        env:
+          TARGET_SHA: ${{ inputs.target_sha }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$(git rev-parse HEAD)" != "$TARGET_SHA" ]]; then
+            echo "::error::Checked-out commit does not match requested release SHA."
+            exit 1
+          fi
+
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          if ! git merge-base --is-ancestor "$TARGET_SHA" origin/main; then
+            echo "::error::Release commit is not part of main."
+            exit 1
+          fi
+
+          commit_subject="$(git log -1 --format=%s)"
+          if [[ "$commit_subject" != "chore(release): bump version to "* ]]; then
+            echo "::error::Commit was not created by bump_version.sh."
+            exit 1
+          fi
+
+          full_version="$(
+            awk '$1 == "version:" { print $2; exit }' pubspec.yaml |
+              tr -d '\r'
+          )"
+          if [[ ! "$full_version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\+([1-9][0-9]*)$ ]]; then
+            echo "::error::pubspec.yaml must contain version X.Y.Z+BUILD."
+            exit 1
+          fi
+
+          version_name="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+          build_number="${BASH_REMATCH[4]}"
+          changelog_file="fastlane/metadata/android/en-US/changelogs/$build_number.txt"
+
+          if [[ ! -s "$changelog_file" ]]; then
+            echo "::error::Missing or empty changelog: $changelog_file"
+            exit 1
+          fi
+
+          if git rev-parse -q --verify "refs/tags/v${version_name}" >/dev/null; then
+            echo "::error::Release tag v${version_name} already exists."
+            exit 1
+          fi
+
+          {
+            echo "version_name=$version_name"
+            echo "build_number=$build_number"
+            echo "changelog_file=$changelog_file"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -32,12 +98,6 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Analyze
-        run: flutter analyze
-
-      - name: Test
-        run: flutter test
 
       - name: Decode keystore
         run: |
@@ -63,29 +123,18 @@ jobs:
       - name: Upload release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-artifacts
+          name: release-${{ steps.version.outputs.version_name }}
           path: |
             build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
             build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
             build/app/outputs/flutter-apk/app-x86_64-release.apk
             build/app/outputs/bundle/release/app-release.aab
 
-      - name: Extract version
-        run: |
-          set -euo pipefail
-          version="$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | tr -d '\r')"
-          echo "VERSION=$version" >> "$GITHUB_ENV"
-
-      - name: Check release tag
-        run: |
-          set -euo pipefail
-          if git rev-parse -q --verify "refs/tags/v${VERSION}" >/dev/null; then
-            echo "VERSION=${VERSION}-build-${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
-          fi
-
       - name: Create GitHub release
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk,build/app/outputs/flutter-apk/app-arm64-v8a-release.apk,build/app/outputs/flutter-apk/app-x86_64-release.apk,build/app/outputs/bundle/release/app-release.aab
-          tag: v${{ env.VERSION }}
+          bodyFile: ${{ steps.version.outputs.changelog_file }}
+          commit: ${{ inputs.target_sha }}
+          tag: v${{ steps.version.outputs.version_name }}
           token: ${{ secrets.GITHUB_TOKEN }}

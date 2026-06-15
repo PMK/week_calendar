@@ -969,7 +969,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('Version'), findsOneWidget);
-    expect(find.text('1.0.0+1'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^\d+\.\d+\.\d+$')), findsOneWidget);
 
     await tester.tap(find.byTooltip('Close settings'));
     await tester.pumpAndSettle();

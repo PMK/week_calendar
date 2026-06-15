@@ -47,7 +47,7 @@ class WeekCalendarPage extends StatefulWidget {
 class _WeekCalendarPageState extends State<WeekCalendarPage>
     with WidgetsBindingObserver {
   static const _currentWeekPage = 10000;
-  static const _appVersion = '1.0.1+2';
+  static const _appVersion = '1.0.1';
 
   late final DateTime _today;
   late final PageController _weekPageController;

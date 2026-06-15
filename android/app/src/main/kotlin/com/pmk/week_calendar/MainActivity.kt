@@ -3,10 +3,9 @@ package com.pmk.week_calendar
 import android.Manifest
 import android.content.ContentUris
 import android.content.ContentValues
-import android.content.ComponentName
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ComponentEnabledSetting
 import android.os.Build
+import android.os.Bundle
 import android.provider.CalendarContract
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.android.FlutterActivity
@@ -20,9 +19,23 @@ import kotlin.concurrent.thread
 
 class MainActivity : FlutterActivity() {
     private val channelName = "week_calendar/calendar"
-    private val settingsName = "week_calendar_settings"
     private val calendarPermissionRequestCode = 4021
     private var pendingPermissionResult: MethodChannel.Result? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        LauncherIconManager.configureSchedule(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        LauncherIconManager.onActivityResumed()
+    }
+
+    override fun onStop() {
+        LauncherIconManager.onActivityStopped(this)
+        super.onStop()
+    }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -74,7 +87,10 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun getAppSettings(): Map<String, Any?> {
-        val preferences = getSharedPreferences(settingsName, MODE_PRIVATE)
+        val preferences = getSharedPreferences(
+            LauncherIconManager.settingsName,
+            MODE_PRIVATE,
+        )
         val hasEnabledCalendarIds = preferences.contains("enabledCalendarIds")
 
         return mapOf(
@@ -99,7 +115,7 @@ class MainActivity : FlutterActivity() {
             ?.toSet()
             ?: emptySet()
 
-        getSharedPreferences(settingsName, MODE_PRIVATE)
+        getSharedPreferences(LauncherIconManager.settingsName, MODE_PRIVATE)
             .edit()
             .putString("weekStartDay", arguments["weekStartDay"]?.toString())
             .putString("themePreference", arguments["themePreference"]?.toString())
@@ -109,6 +125,7 @@ class MainActivity : FlutterActivity() {
             .putStringSet("enabledCalendarIds", enabledCalendarIds)
             .apply()
 
+        LauncherIconManager.configureSchedule(this)
         result.success(true)
     }
 
@@ -119,93 +136,11 @@ class MainActivity : FlutterActivity() {
             return
         }
 
-        val selectedComponent = launcherComponent(iconName)
-        val debugLauncherComponent = debugLauncherComponentOrNull()
-        val selectedComponents = mutableSetOf(selectedComponent)
-        if (iconName == null && debugLauncherComponent != null) {
-            selectedComponents.add(debugLauncherComponent)
-        }
-
-        val launcherComponents = mutableListOf(launcherComponent(null)).apply {
-            addAll((1..53).map { launcherComponent("icon_$it") })
-            if (debugLauncherComponent != null) {
-                add(debugLauncherComponent)
-            }
-        }.distinct()
-
-        try {
-            updateLauncherComponents(selectedComponents, launcherComponents)
-
+        return try {
+            LauncherIconManager.requestLauncherIcon(this, iconName)
             result.success(true)
         } catch (error: IllegalArgumentException) {
             result.error("ICON_CHANGE_FAILED", error.message, null)
-        }
-    }
-
-    private fun updateLauncherComponents(
-        selectedComponents: Set<ComponentName>,
-        launcherComponents: List<ComponentName>,
-    ) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val flags = PackageManager.DONT_KILL_APP or PackageManager.SYNCHRONOUS
-            packageManager.setComponentEnabledSettings(
-                launcherComponents.map { component ->
-                    ComponentEnabledSetting(
-                        component,
-                        if (selectedComponents.contains(component)) {
-                            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                        } else {
-                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-                        },
-                        flags,
-                    )
-                },
-            )
-            return
-        }
-
-        launcherComponents.forEach { component ->
-            packageManager.setComponentEnabledSetting(
-                component,
-                if (selectedComponents.contains(component)) {
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                } else {
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-                },
-                PackageManager.DONT_KILL_APP,
-            )
-        }
-    }
-
-    private fun launcherComponent(iconName: String?): ComponentName {
-        val className = if (iconName == null) {
-            "$packageName.DEFAULT"
-        } else {
-            "$packageName.$iconName"
-        }
-        return ComponentName(packageName, className)
-    }
-
-    private fun debugLauncherComponentOrNull(): ComponentName? {
-        val component = ComponentName(packageName, "$packageName.DebugLaunchActivity")
-        return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                packageManager.getActivityInfo(
-                    component,
-                    PackageManager.ComponentInfoFlags.of(
-                        PackageManager.MATCH_DISABLED_COMPONENTS.toLong(),
-                    ),
-                )
-            } else {
-                @Suppress("DEPRECATION")
-                packageManager.getActivityInfo(
-                    component,
-                    PackageManager.MATCH_DISABLED_COMPONENTS,
-                )
-            }
-            component
-        } catch (_: PackageManager.NameNotFoundException) {
-            null
         }
     }
 
